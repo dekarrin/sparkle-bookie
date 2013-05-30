@@ -1,0 +1,36 @@
+DROP TABLE IF EXISTS Contributions;
+DROP TABLE IF EXISTS Transactions;
+DROP TABLE IF EXISTS Payers;
+DROP TABLE IF EXISTS Categories;
+
+CREATE TABLE Payers (
+	id INTEGER(11) UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(255),
+	PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE Categories (
+	id INTEGER(11) UNSIGNED AUTO_INCREMENT,
+	title VARCHAR(255),
+	PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE Transactions (
+	id INTEGER(11) UNSIGNED AUTO_INCREMENT,
+	event_date TIMESTAMP,
+	description VARCHAR(255),
+	category INTEGER(11) UNSIGNED,
+	personal_transfer TINYINT(1) UNSIGNED,
+	PRIMARY KEY (id),
+	FOREIGN KEY (category) REFERENCES Categories (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE Contributions (
+	id INTEGER(11) UNSIGNED AUTO_INCREMENT,
+	payer INTEGER(11) UNSIGNED,
+	transaction INTEGER(11) UNSIGNED,
+	amount DECIMAL(8,2),
+	PRIMARY KEY (id),
+	FOREIGN KEY (payer) REFERENCES Payers (id),
+	FOREIGN KEY (transaction) REFERENCES Transactions (id)
+) ENGINE=InnoDB;
