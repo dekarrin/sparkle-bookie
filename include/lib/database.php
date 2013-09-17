@@ -85,6 +85,16 @@ class Database
 		return $result;
 	}
 	
+	/**
+	 * Gets only a single value from the database. Always gets the first value
+	 * of the first row.
+	 */
+	public function prepared_get($stmt, $params = NULL) {
+		$table = $this->prepared_select($stmt, $params);
+		$keys = array_keys($table[0]);
+		return $table[0][$keys[0]];
+	}
+	
 	public function select($table, $column, $check, $value, $limit = NULL)
 	{
 		$q = "SELECT $column FROM $table WHERE $check = '$value'";

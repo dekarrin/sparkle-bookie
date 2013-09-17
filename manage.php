@@ -37,7 +37,7 @@ if ($page['tab'] != 'home') {
 <?php
 	} else {
 ?>
-			<p class="no_items">There are currently no <?php echo $page['item_type']; ?></p>
+			<p class="no_items">There are currently no <?php echo $page['item_type']; ?>.</p>
 <?php
 	}
 }
