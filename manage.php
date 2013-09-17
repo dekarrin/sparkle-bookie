@@ -12,8 +12,8 @@
 		<div id="sidebar">
 			<ul>
 				<li><a href="manage.php?tab=home" class="<?php echo get_section_display_class('home'); ?>">Management</a></li>
-				<li><a href="manage.php?tab=category" class="<?php echo get_section_display_class('category'); ?>">Category</a></li>
-				<li><a href="manage.php?tab=user" class="<?php echo get_section_display_class('user'); ?>">Users</a></li>
+				<li><a href="manage.php?tab=account" class="<?php echo get_section_display_class('account'); ?>">Accounts</a></li>
+				<li><a href="manage.php?tab=owner" class="<?php echo get_section_display_class('owner'); ?>">Owners</a></li>
 			</ul>
 		</div>
 		<div id="main">

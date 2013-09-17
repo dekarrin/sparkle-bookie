@@ -11,11 +11,18 @@ function get_section_display_class($section) {
 }
 
 function get_page_variables() {
-	return array(
-		'tab' => get_get_param('tab', 'home'),
-		'section' => get_section_header_text();
-		'intro' => get_section_intro_text();
-		'has_items' => 
-	);
+	$tab = get_get_param('tab', 'home');
+	switch ($tab) {
+	case 'home':
+	case 'account':
+	case 'owner':
+		return array(
+			'tab' => get_get_param('tab', 'home'),
+			'section' => get_section_header_text();
+			'intro' => get_section_intro_text();
+			'has_items' => 
+		);
+		break;
+	}
 }
 ?>
