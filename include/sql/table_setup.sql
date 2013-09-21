@@ -12,16 +12,17 @@ CREATE TABLE Owners (
 
 CREATE TABLE AccountTypes (
 	id INTEGER(11) UNSIGNED AUTO_INCREMENT,
-	title VARCHAR(255),
+	name VARCHAR(255),
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Accounts (
 	id INTEGER(11) UNSIGNED AUTO_INCREMENT,
-	title VARCHAR(255),
+	name VARCHAR(255),
 	owner INTEGER(11) UNSIGNED,
 	PRIMARY KEY (id),
 	FOREIGN KEY (owner) REFERENCES Owners (id) -- Set to Null for no owner (everybody owns it)
+		ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Transactions (
@@ -41,6 +42,11 @@ CREATE TABLE Entries (
 	transaction_id INTEGER(11) UNSIGNED,
 	PRIMARY KEY (id),
 	FOREIGN KEY (transaction_id) REFERENCES Transactions (id)
+		ON DELETE CASCADE,
+	FOREIGN KEY (account1) REFERENCES Accounts (id)
+		ON DELETE CASCADE,
+	FOREIGN KEY (account2) REFERENCES Accounts (id)
+		ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 INSERT INTO AccountTypes (title) VALUES

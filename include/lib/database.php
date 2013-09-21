@@ -57,8 +57,11 @@ class Database
 	
 	// only executes stored query; does not call any special procedure on server
 	// Do not escape args before calling this function; they are escaped in this method.
-	public function execute($name, $params = NULL)
+	//
+	// arguments after name are parameters to the statement
+	public function execute($name)
 	{
+		$params = array_slice(func_get_args(), 1);
 		if (!array_key_exists($name, $this->prepared)) {
 			return FALSE;
 		}
@@ -78,8 +81,10 @@ class Database
 		mysql_free_result($result);
 	}
 	
-	public function prepared_select($stmt, $params = NULL) {
-		$r = $this->execute($stmt, $params);
+	// arguments after stmt are arguments to the prepared statement
+	public function prepared_select($stmt) {
+		$params = func_get_args();
+		$r = call_user_func_array(array(&$this, 'execute'), $params);
 		$result = $this->get_result_array($r);
 		$this->free_result($r);
 		return $result;
@@ -88,9 +93,12 @@ class Database
 	/**
 	 * Gets only a single value from the database. Always gets the first value
 	 * of the first row.
+	 *
+	 * args after stmt are args to the prepared statement
 	 */
-	public function prepared_get($stmt, $params = NULL) {
-		$table = $this->prepared_select($stmt, $params);
+	public function prepared_get($stmt) {
+		$params = func_get_args();
+		$table = call_user_func_array(array(&$this, 'prepared_select'), $params);
 		$keys = array_keys($table[0]);
 		return $table[0][$keys[0]];
 	}

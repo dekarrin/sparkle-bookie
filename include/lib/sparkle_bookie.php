@@ -9,8 +9,8 @@ function get_all_owners() {
 
 function get_all_accounts() {
 	global $db;
-	$cats = $db->prepared_select('get_all_accounts');
-	return $cats;
+	$accounts = $db->prepared_select('get_all_accounts');
+	return $accounts;
 }
 
 function get_owner_count() {

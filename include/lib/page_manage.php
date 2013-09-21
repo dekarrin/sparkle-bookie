@@ -26,17 +26,21 @@ function get_page_variables() {
 		break;
 		
 	case 'account':
-		$page_vars['item_type'] = 'accounts';
+		$page_vars['item_type'] = 'account';
+		$page_vars['item_type_plural'] = 'accounts';
 		$page_vars['section'] = 'Account ';
 		$page_vars['intro'] = 'Manage accounts that transactions may be posted to.';
-		$page_vars['has_items'] = (get_account_count() > 0);
+		$page_vars['items'] = get_all_accounts();
+		$page_vars['has_items'] = (count($page_vars['items']) > 0);
 		break;
 		
 	case 'owner':
-		$page_vars['item_type'] = 'owners';
+		$page_vars['item_type'] = 'owner';
+		$page_vars['item_type_plural'] = 'owners';
 		$page_vars['section'] = 'Owner ';
 		$page_vars['intro'] = 'Manage the owners of accounts.';
-		$page_vars['has_items'] = (get_owner_count() > 0);
+		$page_vars['items'] = get_all_owners();
+		$page_vars['has_items'] = (count($page_vars['items']) > 0);
 		break;
 	}
 	return $page_vars;

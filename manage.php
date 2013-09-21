@@ -25,21 +25,38 @@ if ($page['tab'] != 'home') {
 			<hr />
 <?php
 	if ($page['has_items']) {
+		$type = $page['item_type'];
 ?>
 			<table>
-				<caption>Current <?php echo $page['item_type']; ?></caption>
+				<caption>Current <?php echo $page['item_type_plural']; ?></caption>
 				<tr>
-					<th><!-- Deletion column -->&nbsp;</th>
-					<th><?php echo $page['item_title']; ?></th>
-					<th><!-- Actions column -->&nbsp;</th>
+					<th><!-- Delete column -->&nbsp;</th>
+					<th>Name</th>
+					<th><!-- Edit column-->&nbsp;</th>
 				</tr>
+<?php
+		foreach ($page['items'] as $item) {
+			$id = $item['id'];
+			$name = $item['name'];
+?>
+				<tr>
+					<td><a href="submit.php?action=delete&type=<?php echo $type; ?>&id=<?php echo $id; ?>">X</a></td>
+					<td><?php echo $name; ?></td>
+					<td><a href="edit.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>">Edit</a></td>
+				</tr>
+<?php
+		}
+?>
 			</table>
 <?php
 	} else {
 ?>
-			<p class="no_items">There are currently no <?php echo $page['item_type']; ?>.</p>
+			<p class="no_items">There are currently no <?php echo $page['item_type_plural']; ?>.</p>
 <?php
 	}
+?>
+	<a href="submit.php?action=create&type=<?php echo $type; ?>">Add</a>
+<?php
 }
 ?>
 		</div>
